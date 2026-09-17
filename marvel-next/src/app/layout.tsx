@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Poppins } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const playfair = Cormorant_Garamond({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["500", "700", "800"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
-const poppins = Poppins({
+const poppins = Inter({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],

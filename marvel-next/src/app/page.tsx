@@ -118,7 +118,9 @@ export default function Home() {
             <div className="flex items-center justify-center gap-3.5 mb-4.5 text-cyan text-xs font-semibold tracking-[3px] uppercase before:content-[''] before:w-8.5 before:h-px before:bg-cyan">
               03 — Why Choose Us
             </div>
-            <h2 className="text-[clamp(28px,4vw,42px)] font-bold text-ink font-serif">Built On Quality & Trust</h2>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold text-ink font-serif">
+              Built On Quality &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-cyan italic">Trust</span>
+            </h2>
           </Reveal>
           <FeatureGrid />
         </div>
@@ -130,7 +132,9 @@ export default function Home() {
             <div className="flex items-center justify-center gap-3.5 mb-4.5 text-cyan text-xs font-semibold tracking-[3px] uppercase before:content-[''] before:w-8.5 before:h-px before:bg-cyan">
               04 — Gallery
             </div>
-            <h2 className="text-[clamp(28px,4vw,42px)] font-bold text-ink mb-4 font-serif">A Glimpse of Our Work</h2>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold text-ink mb-4 font-serif">
+              A Glimpse of Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-cyan italic">Work</span>
+            </h2>
             <p className="text-muted text-[15.5px] font-light">
               Some of our finished installations across homes & businesses.
             </p>
@@ -146,7 +150,9 @@ export default function Home() {
             <div className="flex items-center justify-center gap-3.5 mb-4.5 text-cyan text-xs font-semibold tracking-[3px] uppercase before:content-[''] before:w-8.5 before:h-px before:bg-cyan">
               05 — Testimonials
             </div>
-            <h2 className="text-[clamp(28px,4vw,42px)] font-bold text-ink font-serif">What Our Clients Say</h2>
+            <h2 className="text-[clamp(28px,4vw,42px)] font-bold text-ink font-serif">
+              What Our Clients <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-cyan italic">Say</span>
+            </h2>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
@@ -180,7 +186,9 @@ export default function Home() {
             <div className="flex items-center gap-3.5 mb-4.5 text-cyan text-xs font-semibold tracking-[3px] uppercase before:content-[''] before:w-8.5 before:h-px before:bg-cyan">
               06 — Contact Us
             </div>
-            <h3 className="text-ink text-[26px] mb-4.5 font-bold font-serif">Let&apos;s Build Something Beautiful</h3>
+            <h3 className="text-ink text-[26px] mb-4.5 font-bold font-serif">
+              Let&apos;s Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-cyan italic">Beautiful</span>
+            </h3>
             <p className="text-muted mb-6.5 font-light">
               Reach out for product enquiries, custom designs, or installation support.
             </p>
