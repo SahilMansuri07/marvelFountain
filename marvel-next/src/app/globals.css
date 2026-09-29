@@ -120,3 +120,37 @@ nav a.nav-link::after {
 nav a.nav-link:hover::after {
   width: 100%;
 }
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-hero-rise {
+  animation: heroRise 0.9s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+@keyframes slideProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Text link with a sliding arrow ("explore our work →") */
+.arrow-link::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 12px;
+  color: var(--gold);
+  transition: transform 0.44s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.arrow-link:hover::after {
+  transform: translateX(10px);
+}
