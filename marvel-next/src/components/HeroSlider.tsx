@@ -84,13 +84,13 @@ export default function HeroSlider() {
                 className="animate-hero-rise absolute bottom-[120px] left-1/2 w-full max-w-[1240px] -translate-x-1/2 px-7 max-md:bottom-[100px]"
               >
                 <div className="text-gold uppercase tracking-[4px] text-xs font-semibold mb-4">{s.eyebrow}</div>
-                <h2 className="text-white font-serif font-bold text-[clamp(36px,6vw,68px)] leading-[1.1] max-w-[820px]">
+                <h2 className="text-white text-[30px] font-medium leading-[1.1] tracking-[-0.4px] max-w-[820px] sm:text-[38px] md:text-[46px] lg:text-[50px]">
                   {s.title}
                 </h2>
-                <p className="mt-4 max-w-[560px] text-[17px] font-light text-[#cfd0d1]">{s.subtitle}</p>
+                <p className="mt-4 max-w-[620px] text-[18px] font-normal text-[#cfd0d1] md:text-[22px] lg:text-[24px]">{s.subtitle}</p>
                 <Link
                   href={s.href}
-                  className="group mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold to-gold-deep px-8.5 py-4 text-xs font-bold uppercase tracking-widest text-navy-deep shadow-[0_10px_30px_rgba(240,194,75,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(240,194,75,0.5)]"
+                  className="group mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold to-gold-deep px-8.5 py-3.5 text-[15px] font-medium tracking-[0.4px] text-navy-deep shadow-[0_10px_30px_rgba(240,194,75,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(240,194,75,0.5)]"
                 >
                   Discover
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

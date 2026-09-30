@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Figtree } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
-const playfair = Cormorant_Garamond({
-  variable: "--font-playfair",
+// Figtree: free, closest match to Fontana's Proxima Nova (which is a paid font)
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
-});
-
-const poppins = Inter({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hi" className={`${playfair.variable} ${poppins.variable}`}>
+    <html lang="hi" className={figtree.variable}>
       <body className="font-sans antialiased">
         <SmoothScroll />
         {children}

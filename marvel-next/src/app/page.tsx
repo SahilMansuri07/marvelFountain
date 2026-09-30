@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import HeroSlider from "@/components/HeroSlider";
 import ProductCard from "@/components/ProductCard";
 import ProjectsSpotlight from "@/components/ProjectsSpotlight";
-import StarRating from "@/components/StarRating";
+import TestimonialSlider from "@/components/TestimonialSlider";
 import { products } from "@/data/products";
 
 const categories = [
@@ -55,8 +55,8 @@ const testimonials = [
 function SectionHeading({ strong, rest }: { strong: string; rest: string }) {
   return (
     <Reveal className="mx-auto mb-10 w-full max-w-[1240px] px-7">
-      <h2 className="text-[clamp(26px,3.4vw,36px)] font-bold text-ink font-serif">
-        {strong}{" "}
+      <h2 className="text-[24px] font-normal tracking-[-0.016em] text-ink">
+        <strong className="font-semibold">{strong}</strong>{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-cyan italic">{rest}</span>
       </h2>
     </Reveal>
@@ -85,7 +85,7 @@ export default function Home() {
               className="object-cover transition-[transform,filter] duration-[1400ms] ease-[cubic-bezier(.33,1,.68,1)] group-hover:scale-[1.05] group-hover:saturate-[0.75]"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/80 via-navy-deep/10 to-transparent" />
-            <span className="absolute top-0 left-0 z-[1] p-7 text-[clamp(18px,1.9vw,26px)] font-bold font-serif leading-[1.2] text-white transition-colors group-hover:text-gold max-md:p-5">
+            <span className="absolute top-0 left-0 z-[1] p-7 text-[20px] font-medium leading-[1.2] tracking-[-0.02em] text-white lg:text-[26px] lg:font-semibold transition-colors group-hover:text-gold max-md:p-5">
               {c.title}
             </span>
           </Link>
@@ -94,7 +94,7 @@ export default function Home() {
           href="/products"
           className="group relative flex h-[50vw] bg-sand transition-colors duration-300 hover:bg-gold lg:h-[25vw]"
         >
-          <span className="p-7 text-[clamp(18px,1.9vw,26px)] font-bold font-serif text-ink transition-colors group-hover:text-navy-deep max-md:p-5">
+          <span className="p-7 text-[20px] font-medium tracking-[-0.02em] text-ink lg:text-[26px] lg:font-semibold transition-colors group-hover:text-navy-deep max-md:p-5">
             All Products +
           </span>
         </Link>
@@ -104,7 +104,7 @@ export default function Home() {
       <section className="bg-navy-deep px-7 py-28 max-md:py-20">
         <div className="mx-auto max-w-[860px]">
           <Reveal>
-            <ul className="mb-10 flex flex-wrap gap-x-9 gap-y-2 text-xs font-semibold uppercase tracking-[3px] text-muted">
+            <ul className="mb-10 flex flex-wrap gap-x-9 gap-y-2 text-[11px] font-semibold uppercase tracking-[0.4px] text-muted">
               <li className="text-gold">Marvel Fountains</li>
               {stats.map((s) => (
                 <li key={s}>{s}</li>
@@ -112,8 +112,8 @@ export default function Home() {
             </ul>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mb-6 text-[clamp(20px,2.2vw,26px)] leading-[1.5] font-light text-muted">
-              <strong className="font-semibold text-ink">
+            <p className="mb-6 text-[19px] leading-[1.5] font-light text-muted md:text-[22px]">
+              <strong className="font-medium text-ink">
                 Marvel Fountains designs, manufactures &amp; installs premium indoor and outdoor water fountains
                 across India.
               </strong>{" "}
@@ -122,7 +122,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-[clamp(20px,2.2vw,26px)] leading-[1.5] font-light text-muted">
+            <p className="text-[19px] leading-[1.5] font-light text-muted md:text-[22px]">
               From calming tabletop fountains to grand entrance cascades for hotels and farmhouses, we handle
               everything end-to-end — design, fabrication, installation and after-sales care.
             </p>
@@ -137,7 +137,7 @@ export default function Home() {
         <div className="text-center">
           <Link
             href="/gallery"
-            className="arrow-link inline-block px-8 py-10 text-[15px] font-semibold uppercase tracking-widest text-ink transition-colors hover:text-gold"
+            className="arrow-link inline-block px-8 py-10 text-[20px] font-medium text-ink transition-colors hover:text-gold"
           >
             Explore our work
           </Link>
@@ -147,7 +147,7 @@ export default function Home() {
       {/* Featured products */}
       <section className="py-24">
         <SectionHeading strong="Featured" rest="Products" />
-        <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-6 px-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-[1240px] grid-cols-2 gap-3 px-4 sm:gap-6 sm:px-7 lg:grid-cols-3">
           {products.map((p, i) => (
             <ProductCard key={p.slug} product={p} delay={(i % 6) * 0.08} />
           ))}
@@ -157,31 +157,11 @@ export default function Home() {
       {/* Testimonials */}
       <section className="bg-sand py-24">
         <SectionHeading strong="Client" rest="Stories" />
-        <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-6 px-7 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal
-              key={t.name}
-              delay={i * 0.08}
-              className="rounded-2xl border border-line bg-paper p-8.5 transition-all hover:-translate-y-1.5 hover:border-gold/40"
-            >
-              <StarRating size={13} className="mb-3.5" />
-              <p className="text-muted text-sm mb-5.5 font-light italic">&ldquo;{t.quote}&rdquo;</p>
-              <div className="flex items-center gap-3.5 border-t border-line pt-4.5">
-                <div className="w-9.5 h-9.5 rounded-full bg-gradient-to-br from-cyan to-cyan-deep text-navy-deep flex items-center justify-center font-bold text-[13px]">
-                  {t.initial}
-                </div>
-                <div>
-                  <h5 className="text-[13.5px] text-ink font-semibold">{t.name}</h5>
-                  <span className="text-[11.5px] text-muted">{t.role}</span>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <TestimonialSlider testimonials={testimonials} />
         <div className="mx-auto mt-8 max-w-[1240px] px-7">
           <Link
             href="/reviews"
-            className="arrow-link text-[13px] font-semibold uppercase tracking-widest text-ink transition-colors hover:text-gold"
+            className="arrow-link text-[18px] font-medium text-ink transition-colors hover:text-gold"
           >
             Read all reviews
           </Link>
@@ -191,7 +171,7 @@ export default function Home() {
       {/* Contact band */}
       <section className="bg-navy-deep px-7 py-32 max-md:py-20">
         <div className="mx-auto max-w-[1240px]">
-          <h3 className="text-[clamp(34px,5vw,56px)] font-bold font-serif leading-[1.15] text-muted">
+          <h3 className="text-[36px] font-normal leading-[1.15] tracking-[-0.013em] text-muted md:text-[56px]">
             Want to{" "}
             <Link
               href="/contact"
@@ -202,7 +182,7 @@ export default function Home() {
             <br />
             <span className="text-ink">something beautiful?</span>
           </h3>
-          <ul className="mt-12 flex flex-wrap gap-x-12 gap-y-4 text-[15px] font-semibold uppercase tracking-widest">
+          <ul className="mt-12 flex flex-wrap gap-x-[60px] gap-y-4 text-[18px] font-medium">
             <li>
               <Link href="/contact" className="arrow-link text-ink transition-colors hover:text-gold">
                 Get in touch

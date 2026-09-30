@@ -32,8 +32,8 @@
   --color-cyan: var(--cyan);
   --color-cyan-deep: var(--cyan-deep);
   --color-cyan-soft: var(--cyan-soft);
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-poppins);
+  --font-serif: var(--font-figtree);
+  --font-sans: var(--font-figtree);
 }
 
 * {
@@ -47,9 +47,10 @@ html {
 body {
   background: var(--paper);
   color: var(--ink);
-  line-height: 1.7;
+  line-height: 1.5;
   overflow-x: hidden;
-  font-size: 15px;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 @keyframes floatY {

@@ -66,7 +66,7 @@ export default function Header({ solid = false }: { solid?: boolean }) {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className={`nav-link font-medium text-[13px] tracking-wide uppercase pb-1 transition-colors max-md:text-ink hover:text-cyan ${
+                  className={`nav-link font-medium text-[16px] pb-1 transition-colors max-md:text-ink hover:text-cyan ${
                     isSolidState ? "text-ink" : "text-white"
                   }`}
                 >

@@ -40,8 +40,8 @@ export default function PageHero({
           ))}
         </nav>
         <h1
-          className={`animate-hero-rise font-serif font-bold leading-[1.1] text-white ${
-            tall ? "max-w-[980px] text-[clamp(34px,5.4vw,66px)]" : "text-[clamp(44px,7vw,88px)]"
+          className={`animate-hero-rise leading-[1.12] text-white ${
+            tall ? "max-w-[980px] text-[36px] font-normal md:text-[52px] lg:text-[68px]" : "text-[44px] font-semibold md:text-[68px]"
           }`}
           style={{ animationDelay: "0.12s" }}
         >

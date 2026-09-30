@@ -57,8 +57,8 @@ export default function ProjectsSpotlight({ projects }: { projects: Project[] })
 
               <motion.div custom={i} variants={riseUp} className="absolute bottom-0 left-0 right-0 p-6 max-md:p-4">
                 <span className="mb-3 block h-0.5 w-6 bg-gold transition-[width] duration-500 group-hover:w-12" />
-                <span className="text-gold text-[11px] font-semibold uppercase tracking-[2px]">{p.place}</span>
-                <div className="mt-1 text-[clamp(17px,1.5vw,22px)] font-bold font-serif leading-tight text-white transition-transform duration-500 group-hover:-translate-y-1">
+                <span className="text-gold text-[15px] lg:text-[17px]">{p.place}</span>
+                <div className="mt-1 text-[22px] font-medium leading-[28px] text-white lg:text-[26px] lg:leading-[30px] transition-transform duration-500 group-hover:-translate-y-1">
                   {p.title}
                 </div>
                 <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:grid-rows-[1fr] group-hover:opacity-100">
