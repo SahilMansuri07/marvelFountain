@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ProductCard from "./ProductCard";
-import type { Product } from "@/data/products";
+import type { Product } from "@/lib/queries";
 
 export default function ProductFilterGrid({
   products,

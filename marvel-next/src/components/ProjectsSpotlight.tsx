@@ -36,7 +36,7 @@ export default function ProjectsSpotlight({ projects }: { projects: Project[] })
           className="group relative h-[70vw] sm:h-[45vw] lg:h-full lg:flex-1 lg:transition-[flex-grow] lg:duration-700 lg:ease-[cubic-bezier(.16,1,.3,1)] lg:hover:flex-[2]"
         >
           <motion.div custom={i} variants={curtain} className="absolute inset-0 overflow-hidden">
-            <Link href="/gallery" className="absolute inset-0 block">
+            <Link href="/projects" className="absolute inset-0 block">
               <motion.div custom={i} variants={zoomOut} className="absolute inset-0">
                 <Image
                   src={p.image}

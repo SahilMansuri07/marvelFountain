@@ -1,97 +1,62 @@
-"use client";
+import HeaderClient, { type NavItem } from "./HeaderClient";
+import { getCategories, getGalleryCategories, getMenu, getVideos } from "@/lib/queries";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/products", label: "Products" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/reviews", label: "Reviews" },
-  { href: "/contact", label: "Contact" },
-];
+// Server half of the header: builds the mega menus from the database, then hands
+// them to the interactive client header.
+export default async function Header({ solid = false, title }: { solid?: boolean; title?: string }) {
+  const [categories, photoCategories, videos, productsRec, productsBtns, galleryRec, galleryBtns] = await Promise.all([
+    getCategories(),
+    getGalleryCategories(),
+    getVideos(),
+    getMenu("header_products_recommended"),
+    getMenu("header_products_buttons"),
+    getMenu("header_gallery_recommended"),
+    getMenu("header_gallery_buttons"),
+  ]);
 
-export default function Header({ solid = false }: { solid?: boolean }) {
-  const [scrolled, setScrolled] = useState(solid);
-  const [open, setOpen] = useState(false);
+  const navItems: NavItem[] = [
+    { href: "/", label: "Home" },
+    {
+      href: "/products",
+      label: "Products",
+      mega: {
+        recommended: productsRec,
+        buttons: productsBtns,
+        columns: categories
+        .filter((c) => c.collections.length > 0)
+        .map((c) => ({
+            title: c.name,
+            viewAll: `/products#${c.slug}`,
+            links: c.collections.map((col) => ({ label: col.title, href: col.href })),
+          })),
+      },
+    },
+    { href: "/projects", label: "Projects" },
+    {
+      href: "/gallery",
+      label: "Gallery",
+      mega: {
+        recommended: galleryRec,
+        buttons: galleryBtns,
+        columns: [
+          {
+            title: "Photos",
+            viewAll: "/gallery#photos",
+            links: photoCategories.map((c) => ({ label: c, href: `/gallery#${slug(c)}` })),
+          },
+          {
+            title: "Videos",
+            viewAll: "/gallery#videos",
+            links: videos.slice(0, 5).map((v) => ({ label: v.title, href: "/gallery#videos" })),
+          },
+        ],
+      },
+    },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact Us" },
+  ];
 
-  useEffect(() => {
-    if (solid) return;
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [solid]);
-
-  const isSolidState = solid || scrolled;
-
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-[100] border-b transition-all duration-300 ${
-        isSolidState
-          ? "bg-navy-deep/95 border-line shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-md"
-          : "bg-gradient-to-b from-navy-deep/60 to-transparent border-transparent"
-      }`}
-    >
-      <div
-        className={`max-w-[1240px] mx-auto flex items-center justify-between gap-6 px-7 transition-[padding] duration-300 ${
-          isSolidState ? "py-2.5" : "py-4"
-        }`}
-      >
-        <Link href="/" className="flex shrink-0 items-center">
-          <span className="flex items-center rounded-lg bg-white px-3 py-1.5 shadow-[0_4px_16px_rgba(212,175,55,0.15)]">
-            <Image
-              src="/logo.png"
-              alt="Marvel Fountains logo"
-              height={73}
-              width={249}
-              className="w-auto"
-              style={{ height: "38px" }}
-              priority
-            />
-          </span>
-        </Link>
-
-        <nav>
-          <ul
-            className={`flex gap-9 max-md:fixed max-md:top-0 max-md:right-0 max-md:bottom-0 max-md:h-screen max-md:w-[270px] max-md:flex-col max-md:justify-center max-md:gap-6 max-md:bg-navy-deep max-md:px-6 max-md:shadow-[-10px_0_40px_rgba(0,0,0,0.35)] max-md:transition-transform max-md:duration-300 ${
-              open ? "max-md:translate-x-0" : "max-md:translate-x-full"
-            }`}
-          >
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`nav-link font-medium text-[16px] pb-1 transition-colors max-md:text-ink hover:text-cyan ${
-                    isSolidState ? "text-ink" : "text-white"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <Link
-          href="/contact"
-          className="hidden sm:inline-flex items-center rounded-full bg-cyan px-6 py-2.5 font-semibold text-xs tracking-widest uppercase text-navy-deep whitespace-nowrap shadow-[0_6px_18px_rgba(63,197,240,0.35)] transition-all hover:shadow-[0_8px_24px_rgba(63,197,240,0.5)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_2px_8px_rgba(63,197,240,0.4)]"
-        >
-          Get Quote
-        </Link>
-
-        <button
-          className={`hidden max-md:flex items-center justify-center cursor-pointer z-10 ${isSolidState ? "text-ink" : "text-white"}`}
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} className="text-ink" /> : <Menu size={24} />}
-        </button>
-      </div>
-    </header>
-  );
+  return <HeaderClient navItems={navItems} solid={solid} title={title} />;
 }

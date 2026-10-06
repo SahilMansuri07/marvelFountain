@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marvel Fountains website
 
-## Getting Started
+Next.js site whose content (products, gallery, projects, reviews, menus, contact details …) lives in a
+MySQL / MariaDB database and is managed from the admin panel at `/admin`.
 
-First, run the development server:
+## Setup (XAMPP)
+
+1. Start **MySQL** in the XAMPP control panel.
+2. Copy `.env.example` to `.env.local` and fill it in (XAMPP default: user `root`, empty password).
+3. Install and create the database with the initial content and the admin login:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run db:setup              # first time; prints the admin login
+npm run db:setup -- --reset   # wipe everything and reload the initial content
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. `npm run dev` → site at http://localhost:3000, admin at http://localhost:3000/admin
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The database files are in `database/`: `schema.sql` (tables) and `seed.sql` (initial content). Both can
+also be imported by hand in phpMyAdmin; the admin user is only created by `npm run db:setup`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How it works
 
-## Learn More
+- `src/lib/queries.ts` — every database read used by the public pages.
+- Public pages are rendered from the database and cached. Saving anything in the admin panel clears
+  that cache, so changes show up on the next page load — no rebuild needed.
+- `npm run build` reads the database, so MySQL must be running while building.
+- Site photos (copied from the old marvelfountains.com site) are in `public/media/`.
+- Images uploaded in the admin are stored in `uploads/` (git-ignored) and served from `/uploads/…`.
+- Contact form submissions are saved in `contact_messages` and listed under **Messages** in the admin.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploying
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site now needs a Node server and a reachable MySQL database — it is no longer a static export.
+On the host, set the same variables as in `.env.local` (`DB_*`, `SESSION_SECRET`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+for this entire application remove static data create one optimized Sql file database for this website.
+also
+connect it with frontend 
+add this dummy data into the database and fetch it from database COnnect backend with it 
+also create Uploads folder and download all this store it into the uploads folder and then add URL into database 
+and fetch it from the database and make it dynamic

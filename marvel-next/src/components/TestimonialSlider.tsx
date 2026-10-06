@@ -28,7 +28,7 @@ export default function TestimonialSlider({ testimonials }: { testimonials: Test
     "flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-ink transition-colors hover:border-gold hover:text-gold";
 
   return (
-    <div className="mx-auto max-w-[1240px] px-7">
+    <div className="mx-auto max-w-[1240px] px-7 max-md:px-4">
       <div
         ref={trackRef}
         onScroll={onScroll}

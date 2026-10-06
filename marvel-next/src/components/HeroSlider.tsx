@@ -3,59 +3,21 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-type Slide = {
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  href: string;
-  video?: string;
-  image?: string;
-};
-
-const slides: Slide[] = [
-  {
-    eyebrow: "Water · Art · Craft",
-    title: "Timeless Water Fountains",
-    subtitle: "Designed, manufactured and installed for elegant living spaces.",
-    href: "/products",
-    video: "/videos/hero-fountain-2.mp4",
-  },
-  {
-    eyebrow: "Commercial",
-    title: "Grand Entrance Fountains",
-    subtitle: "Statement pieces for hotels, farmhouses and commercial complexes.",
-    href: "/products/grand-entrance-fountain",
-    image: "https://www.marvelfountains.com/images/mf1.jpg",
-  },
-  {
-    eyebrow: "Interior",
-    title: "Wall & LED Water Features",
-    subtitle: "A calming water curtain for lobbies, offices and living rooms.",
-    href: "/products/wall-mounted-water-feature",
-    image: "https://www.marvelfountains.com/img/wf1.jpg",
-  },
-  {
-    eyebrow: "Outdoor",
-    title: "Garden Fountains",
-    subtitle: "Weatherproof multi-tier cascades for lawns and courtyards.",
-    href: "/products/classic-garden-fountain",
-    image: "https://www.marvelfountains.com/img/st1.jpg",
-  },
-];
+import type { HeroSlide } from "@/lib/queries";
 
 const INTERVAL = 7000;
 
-export default function HeroSlider() {
+export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (slides.length < 2) return;
     const id = setTimeout(() => setIndex((i) => (i + 1) % slides.length), INTERVAL);
     return () => clearTimeout(id);
-  }, [index]);
+  }, [index, slides.length]);
 
   return (
-    <section className="relative h-screen min-h-[600px] overflow-hidden bg-navy-deep">
+    <section className="relative h-screen min-h-[600px] overflow-hidden bg-navy-deep max-md:mt-20 max-md:h-[calc(100svh-5rem)] max-md:min-h-[520px]">
       {slides.map((s, i) => {
         const active = i === index;
         return (
@@ -81,10 +43,10 @@ export default function HeroSlider() {
             {active && (
               <div
                 key={index}
-                className="animate-hero-rise absolute bottom-[120px] left-1/2 w-full max-w-[1240px] -translate-x-1/2 px-7 max-md:bottom-[100px]"
+                className="animate-hero-rise absolute bottom-[120px] left-1/2 w-full max-w-[1240px] -translate-x-1/2 px-7 max-md:bottom-[88px] max-md:px-4"
               >
                 <div className="text-gold uppercase tracking-[4px] text-xs font-semibold mb-4">{s.eyebrow}</div>
-                <h2 className="text-white text-[30px] font-medium leading-[1.1] tracking-[-0.4px] max-w-[820px] sm:text-[38px] md:text-[46px] lg:text-[50px]">
+                <h2 className="text-white text-[30px] font-medium leading-[1.1] tracking-[-0.4px] max-md:text-[40px] max-md:font-bold max-md:leading-[1.02] max-md:tracking-[-0.035em] max-w-[820px] sm:text-[38px] md:text-[46px] lg:text-[50px]">
                   {s.title}
                 </h2>
                 <p className="mt-4 max-w-[620px] text-[18px] font-normal text-[#cfd0d1] md:text-[22px] lg:text-[24px]">{s.subtitle}</p>
@@ -101,7 +63,7 @@ export default function HeroSlider() {
         );
       })}
 
-      <div className="absolute bottom-12 left-1/2 z-[2] flex w-full max-w-[1240px] -translate-x-1/2 gap-2.5 px-7">
+      <div className="absolute bottom-12 left-1/2 z-[2] flex w-full max-w-[1240px] -translate-x-1/2 gap-2.5 px-7 max-md:bottom-10 max-md:px-4">
         {slides.map((s, i) => (
           <button
             key={s.title}

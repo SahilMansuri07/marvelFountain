@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
-import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 // Figtree: free, closest match to Fontana's Proxima Nova (which is a paid font)
@@ -25,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="hi" className={figtree.variable}>
       <body className="font-sans antialiased">
-        <SmoothScroll />
         {children}
       </body>
     </html>
